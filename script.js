@@ -22,4 +22,39 @@ function spawnItem() {
   document.querySelector("svg").appendChild(item)
 }
 
+function handleKeyRelease(ev) {
+  if (ev.code === "ArrowRight") {
+    dx = 0
+  } else if (ev.code === "ArrowLeft") {
+    dx = 0
+  }
+}
+
+function gameLoop() {
+  // Update game state
+  dy = Math.min(dy + 0.05, 1)
+
+  const player = document.querySelector("#player");
+
+
+  let posY = parseFloat(player.getAttribute("cy"));
+  let r = parseInt(player.getAttribute("r"))
+  if (posY > 100 - r - dy) {
+    dy = 0
+  }
+  player.setAttribute("cy", posY + dy);
+  
+  
+  let posX = parseFloat(player.getAttribute("cx"));
+  player.setAttribute("cx", posX + dx);
+
+
+
+  // Loop forever
+  window.requestAnimationFrame(gameLoop);
+}
+
+gameLoop()
+
 window.onkeydown = handleKeyPress;
+window.onkeyup = handleKeyRelease;
