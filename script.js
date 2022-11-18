@@ -1,3 +1,6 @@
+let dy = 0
+let dx = 0
+
 function handleKeyPress(ev) {
   const player = document.querySelector("#player");
   console.log(ev)
